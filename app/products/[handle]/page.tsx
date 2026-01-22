@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getProductByHandle } from "@/lib/shopify-client";
-import AddToCartButton from "@/components/AddToCartButton";
+import ProductVariantSelector from "@/components/ProductVariantSelector";
 
 export default async function ProductPage({
   params,
@@ -57,29 +57,10 @@ export default async function ProductPage({
               />
             )}
 
-            {product.variants && product.variants.length > 0 && (
-              <div className="mb-6">
-                <label className="block mb-2 font-semibold">
-                  Select Variant:
-                </label>
-                <select
-                  id="variant-select"
-                  className="w-full p-2 border rounded"
-                  defaultValue={product.variants[0].id}
-                >
-                  {product.variants.map((variant: any) => (
-                    <option key={variant.id} value={variant.id}>
-                      {variant.title} - {variant.price.amount}{" "}
-                      {variant.price.currencyCode}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-            <AddToCartButton
+            <ProductVariantSelector
               productId={product.id}
-              variantId={product.variants?.[0]?.id}
+              variants={product.variants || []}
+              defaultVariantId={product.variants?.[0]?.id}
             />
           </div>
         </div>

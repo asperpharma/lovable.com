@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CREATE_CHECKOUT_QUERY, shopifyClient } from "@/lib/shopify";
+import { CREATE_CHECKOUT_QUERY, shopifyRequest } from "@/lib/shopify";
 
 interface AddToCartButtonProps {
   productId: string;

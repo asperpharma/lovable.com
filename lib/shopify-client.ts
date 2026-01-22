@@ -1,6 +1,7 @@
 import {
   GET_PRODUCT_BY_HANDLE_QUERY,
   GET_PRODUCTS_QUERY,
+  shopifyClient,
   shopifyRequest,
 } from "./shopify";
 
