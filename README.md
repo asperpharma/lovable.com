@@ -1,67 +1,145 @@
-# Asper Beauty Shop - Domain Configuration
+# Asper Beauty Shop
 
-This project is configured to use the custom domain **www.asperbeautyshop.com**.
+A modern e-commerce storefront for Asper Beauty Shop, built with Lovable, Next.js, and Shopify, configured for www.asperbeautyshop.com.
 
-## Domain Setup Instructions
+## Features
 
-### Step 1: Connect Domain in Lovable Platform
+- 🛍️ Full Shopify integration with Storefront API
+- 🎨 Modern, responsive design
+- 🚀 Built with Next.js 14 and React
+- 🌐 Configured for GoDaddy domain
+- ⚡ Fast and optimized
 
-1. Go to your Lovable project dashboard
-2. Navigate to **Project → Settings → Domains**
-3. Click **Connect domain**
-4. Enter: `www.asperbeautyshop.com`
-5. Choose your setup method:
-   - **Automatic setup**: Select your domain provider and authorize DNS updates
-   - **Manual setup**: Follow the DNS records below
+## Setup Instructions
 
-### Step 2: DNS Configuration
+### 1. Install Dependencies
 
-If using manual setup, add these DNS records to your domain registrar (asperbeautyshop.com):
-
-#### For www.asperbeautyshop.com:
-- **Type**: `A` Record
-- **Name**: `www`
-- **Value**: [Provided by Lovable - typically an IP address]
-- **TTL**: 3600 (or default)
-
-- **Type**: `TXT` Record  
-- **Name**: `www`
-- **Value**: [Provided by Lovable for verification]
-- **TTL**: 3600 (or default)
-
-#### For root domain (asperbeautyshop.com):
-- **Type**: `A` Record
-- **Name**: `@` (or root)
-- **Value**: [Same IP as www record]
-- **TTL**: 3600 (or default)
-
-**Important Notes:**
-- Remove any existing `AAAA` records before adding new ones
-- DNS changes can take up to 72 hours to propagate (usually within hours)
-- SSL certificate will be automatically issued after DNS verification
-
-### Step 3: Environment Variables
-
-Make sure your `.env` file includes:
-```
-NEXT_PUBLIC_SITE_URL=https://www.asperbeautyshop.com
-NEXT_PUBLIC_DOMAIN=www.asperbeautyshop.com
+```bash
+npm install
 ```
 
-### Step 4: Verify Connection
+### 2. Configure Environment Variables
 
-1. Wait for DNS propagation
-2. Check SSL certificate status in Lovable dashboard
-3. Visit https://www.asperbeautyshop.com to verify it's working
+Copy `.env.example` to `.env` and fill in your Shopify credentials:
 
-## Troubleshooting
+```bash
+cp .env.example .env
+```
 
-- **Domain not resolving**: Check DNS propagation using tools like `nslookup` or `dig`
-- **SSL certificate issues**: Wait 24-48 hours after DNS verification
-- **404 errors**: Ensure your project is published in Lovable
-- **CNAME conflicts**: Remove any existing CNAME records for www subdomain
+Required variables:
+- `NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN`: Your Shopify store domain (e.g., `your-store.myshopify.com`)
+- `NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN`: Your Shopify Storefront API access token
+
+### 3. Get Shopify Storefront API Token
+
+1. Go to your Shopify Admin
+2. Navigate to Settings > Apps and sales channels > Develop apps
+3. Create a new app or use an existing one
+4. Enable Storefront API access
+5. Copy the Storefront API access token
+
+### 4. Configure Domain (www.asperbeautyshop.com)
+
+#### Option A: Automatic Connection (Recommended)
+1. In your Shopify Admin, go to Settings > Domains
+2. Click "Connect existing domain"
+3. Enter `asperbeautyshop.com`
+4. Follow the prompts to connect automatically
+
+#### Option B: Manual DNS Configuration
+1. Log in to your GoDaddy account
+2. Go to DNS Management for `asperbeautyshop.com`
+3. Update the following records:
+   - **A Record (@)**: Point to `23.227.38.65`
+   - **CNAME Record (www)**: Point to `shops.myshopify.com`
+4. Wait up to 48 hours for DNS propagation
+
+**See `DOMAIN_SETUP.md` for detailed domain configuration instructions.**
+
+### 5. Deploy to Lovable
+
+1. Push your code to your Lovable project
+2. In Lovable dashboard, configure your deployment settings
+3. Add custom domains:
+   - `asperbeautyshop.com`
+   - `www.asperbeautyshop.com`
+4. Deploy!
+
+### 6. Run Development Server
+
+```bash
+npm run dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) to see your store.
+
+## Project Structure
+
+```
+├── app/                    # Next.js app directory
+│   ├── page.tsx           # Home page
+│   ├── products/          # Products pages
+│   └── cart/              # Cart page
+├── components/            # React components
+│   └── AddToCartButton.tsx
+├── lib/                   # Utilities and API clients
+│   ├── shopify.ts        # Shopify API client
+│   └── shopify-client.ts  # Shopify helper functions
+└── public/                # Static assets
+```
+
+## Shopify Integration
+
+This project uses the Shopify Storefront API to:
+- Fetch products
+- Display product details
+- Create checkouts
+- Handle cart functionality
+
+## Domain Configuration
+
+### Domain: www.asperbeautyshop.com
+
+Your domain `asperbeautyshop.com` is configured for:
+- **Primary URL**: www.asperbeautyshop.com
+- **Root domain**: asperbeautyshop.com (redirects to www)
+- **SSL**: Automatically provisioned by Shopify/Vercel
+- **DNS**: Managed via GoDaddy
+
+### GoDaddy to Shopify Connection
+
+Your GoDaddy domain is connected to Shopify, which handles:
+- SSL certificates
+- Domain verification
+- DNS management (if using automatic connection)
+
+### Custom Domain in Lovable
+
+After connecting your domain to Shopify, configure it in Lovable:
+1. Go to your Lovable project settings
+2. Add custom domains: `asperbeautyshop.com` and `www.asperbeautyshop.com`
+3. Update DNS records if needed (Lovable will provide instructions)
+
+**For detailed setup, see `DOMAIN_SETUP.md`**
+
+## Publishing Checklist
+
+- [ ] Environment variables configured
+- [ ] Shopify Storefront API token added
+- [ ] GoDaddy domain connected to Shopify
+- [ ] Domain configured in Lovable
+- [ ] Test all product pages
+- [ ] Test checkout flow
+- [ ] Verify SSL certificate
+- [ ] Test on mobile devices
 
 ## Support
 
-For domain-related issues, contact Lovable support or refer to:
-- [Lovable Custom Domain Documentation](https://docs.lovable.dev/features/custom-domain)
+For issues or questions:
+- Lovable Documentation: https://docs.lovable.dev
+- Shopify Help Center: https://help.shopify.com
+- GoDaddy Support: https://www.godaddy.com/help
+
+## License
+
+MIT
