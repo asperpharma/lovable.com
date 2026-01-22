@@ -1,10 +1,12 @@
 # Domain Setup Guide for www.asperbeautyshop.com
 
-This guide provides step-by-step instructions to connect your Lovable project to www.asperbeautyshop.com.
+This guide provides step-by-step instructions to connect your Lovable project to
+www.asperbeautyshop.com.
 
 ## Domain Configuration Overview
 
 Your domain **asperbeautyshop.com** needs to be configured in three places:
+
 1. **GoDaddy** - DNS management
 2. **Shopify** - Domain connection for checkout
 3. **Lovable/Vercel** - Frontend hosting
@@ -77,16 +79,19 @@ If automatic connection doesn't work, configure manually:
 **Important:** If your domain is connected to Shopify, you have two options:
 
 ### Option 1: Shopify Hosting (Full E-commerce)
+
 - Domain points directly to Shopify
 - Shopify handles all hosting and checkout
 - Frontend can be embedded via Shopify themes
 
 ### Option 2: Lovable/Vercel Hosting (Headless)
+
 - Domain points to Lovable/Vercel for frontend
 - Shopify Storefront API handles products/checkout
 - Requires CNAME record pointing to Vercel/Lovable
 
 **For www.asperbeautyshop.com, we recommend:**
+
 - **Root domain (asperbeautyshop.com)** → Shopify (for checkout)
 - **WWW (www.asperbeautyshop.com)** → Lovable/Vercel (for frontend)
 
@@ -108,7 +113,8 @@ NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-token-here
 After configuration, verify:
 
 - [ ] `www.asperbeautyshop.com` loads your Lovable site
-- [ ] `asperbeautyshop.com` redirects to `www.asperbeautyshop.com` (or loads correctly)
+- [ ] `asperbeautyshop.com` redirects to `www.asperbeautyshop.com` (or loads
+      correctly)
 - [ ] SSL certificate is active (HTTPS works)
 - [ ] Products load from Shopify API
 - [ ] Checkout redirects to Shopify correctly
@@ -117,23 +123,27 @@ After configuration, verify:
 ## Troubleshooting
 
 ### Domain Not Loading
+
 - Wait 24-48 hours for DNS propagation
 - Verify DNS records in GoDaddy match instructions
 - Check domain status in Shopify Admin
 - Verify domain in Lovable/Vercel dashboard
 
 ### SSL Certificate Issues
+
 - Shopify automatically provisions SSL for connected domains
 - Vercel/Lovable automatically provisions SSL
 - Wait up to 24 hours for SSL activation
 
 ### Mixed Content Warnings
+
 - Ensure all API calls use HTTPS
 - Check that Shopify Storefront API uses HTTPS URLs
 
 ## Current Configuration
 
 Based on your project files:
+
 - **Domain**: www.asperbeautyshop.com
 - **Platform**: Next.js on Vercel/Lovable
 - **E-commerce**: Shopify Storefront API

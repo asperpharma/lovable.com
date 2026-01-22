@@ -1,25 +1,27 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { shopifyClient, CREATE_CHECKOUT_QUERY } from '@/lib/shopify'
+import { useState } from "react";
+import { CREATE_CHECKOUT_QUERY, shopifyClient } from "@/lib/shopify";
 
 interface AddToCartButtonProps {
-  productId: string
-  variantId?: string
+  productId: string;
+  variantId?: string;
 }
 
-export default function AddToCartButton({ productId, variantId }: AddToCartButtonProps) {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+export default function AddToCartButton(
+  { productId, variantId }: AddToCartButtonProps,
+) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleAddToCart = async () => {
     if (!variantId) {
-      setError('Please select a variant')
-      return
+      setError("Please select a variant");
+      return;
     }
 
-    setLoading(true)
-    setError(null)
+    setLoading(true);
+    setError(null);
 
     try {
       const response = await shopifyRequest(CREATE_CHECKOUT_QUERY, {
@@ -31,26 +33,26 @@ export default function AddToCartButton({ productId, variantId }: AddToCartButto
             },
           ],
         },
-      })
+      });
 
-      const checkout = response.data?.checkoutCreate?.checkout
+      const checkout = response.data?.checkoutCreate?.checkout;
       if (checkout?.webUrl) {
         // Redirect to Shopify checkout
-        window.location.href = checkout.webUrl
+        window.location.href = checkout.webUrl;
       } else {
-        const errors = response.data?.checkoutCreate?.checkoutUserErrors
+        const errors = response.data?.checkoutCreate?.checkoutUserErrors;
         if (errors && errors.length > 0) {
-          setError(errors[0].message)
+          setError(errors[0].message);
         } else {
-          setError('Failed to create checkout')
+          setError("Failed to create checkout");
         }
       }
     } catch (err: any) {
-      setError(err.message || 'An error occurred')
+      setError(err.message || "An error occurred");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div>
@@ -59,11 +61,9 @@ export default function AddToCartButton({ productId, variantId }: AddToCartButto
         disabled={loading || !variantId}
         className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-        {loading ? 'Adding...' : 'Add to Cart'}
+        {loading ? "Adding..." : "Add to Cart"}
       </button>
-      {error && (
-        <p className="mt-2 text-red-600 text-sm">{error}</p>
-      )}
+      {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}
     </div>
-  )
+  );
 }

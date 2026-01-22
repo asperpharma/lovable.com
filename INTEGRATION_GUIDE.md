@@ -2,7 +2,8 @@
 
 ## Overview
 
-This guide explains how all three platforms work together to power your e-commerce website.
+This guide explains how all three platforms work together to power your
+e-commerce website.
 
 ## Architecture
 
@@ -38,11 +39,13 @@ This guide explains how all three platforms work together to power your e-commer
 ### 1. Domain Flow (GoDaddy → Shopify)
 
 **Purpose:** Your GoDaddy domain points to Shopify for:
+
 - SSL certificate management
 - Domain verification
 - Professional email (optional)
 
 **Process:**
+
 1. Domain registered with GoDaddy
 2. DNS records point to Shopify servers
 3. Shopify handles SSL and domain management
@@ -53,12 +56,14 @@ This guide explains how all three platforms work together to power your e-commer
 **Purpose:** Lovable frontend fetches product data from Shopify
 
 **Process:**
+
 1. Lovable frontend makes API calls to Shopify Storefront API
 2. Shopify returns product data (JSON)
 3. Lovable displays products in custom design
 4. Real-time inventory and pricing
 
 **API Endpoints Used:**
+
 - `GET /api/2024-01/graphql.json` - GraphQL queries
 - Products, variants, images, pricing
 
@@ -67,6 +72,7 @@ This guide explains how all three platforms work together to power your e-commer
 **Purpose:** Customers complete purchases through Shopify's secure checkout
 
 **Process:**
+
 1. Customer clicks "Add to Cart" in Lovable
 2. Lovable creates checkout session via Shopify API
 3. Customer redirected to Shopify checkout
@@ -78,11 +84,13 @@ This guide explains how all three platforms work together to power your e-commer
 ### Shopify Storefront API
 
 **What it does:**
+
 - Provides read access to products
 - Allows creating checkouts
 - Returns product data in JSON format
 
 **Security:**
+
 - Uses access token (not full admin access)
 - Read-only for most operations
 - Write access only for checkout creation
@@ -90,21 +98,25 @@ This guide explains how all three platforms work together to power your e-commer
 ### GoDaddy DNS Configuration
 
 **A Record:**
+
 - Points root domain (@) to Shopify IP
 - Value: `23.227.38.65`
 
 **CNAME Record:**
+
 - Points www subdomain to Shopify
 - Value: `shops.myshopify.com`
 
 ### Lovable Deployment
 
 **Hosting:**
+
 - Frontend hosted on Lovable/Vercel
 - Static and server-side rendering
 - CDN for fast global delivery
 
 **Environment Variables:**
+
 - Store domain and API token
 - Configured in Lovable dashboard
 - Secure and encrypted
@@ -136,20 +148,24 @@ This guide explains how all three platforms work together to power your e-commer
 ## Benefits of This Setup
 
 ✅ **Best of Both Worlds:**
+
 - Lovable: Beautiful, custom frontend
 - Shopify: Robust e-commerce backend
 
 ✅ **Security:**
+
 - Shopify handles all payment processing
 - PCI compliance handled by Shopify
 - Secure checkout experience
 
 ✅ **Reliability:**
+
 - Shopify's proven infrastructure
 - 99.9% uptime guarantee
 - Automatic backups
 
 ✅ **Flexibility:**
+
 - Customize frontend design freely
 - Use Shopify's powerful admin
 - Easy to update and maintain
@@ -159,16 +175,19 @@ This guide explains how all three platforms work together to power your e-commer
 ### Regular Tasks
 
 **Weekly:**
+
 - Check for new orders in Shopify
 - Update product inventory if needed
 - Review analytics
 
 **Monthly:**
+
 - Update product images/content
 - Review and optimize performance
 - Check domain and SSL status
 
 **As Needed:**
+
 - Add new products
 - Update pricing
 - Modify frontend design
@@ -177,16 +196,19 @@ This guide explains how all three platforms work together to power your e-commer
 ## Troubleshooting Integration Issues
 
 ### Products Not Loading
+
 - Check Shopify API token
 - Verify products are published
 - Check network requests in browser console
 
 ### Checkout Not Working
+
 - Verify checkout scopes enabled
 - Check API token permissions
 - Test with different products
 
 ### Domain Issues
+
 - Verify DNS records correct
 - Wait for DNS propagation
 - Check domain status in Shopify

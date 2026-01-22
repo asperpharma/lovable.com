@@ -76,22 +76,26 @@
      - `asperbeautyshop.com`
      - `www.asperbeautyshop.com`
    - Follow Lovable's DNS instructions if needed
-   - Note: If domain is already connected to Shopify, you may need to use Shopify's hosting or configure subdomain routing
+   - Note: If domain is already connected to Shopify, you may need to use
+     Shopify's hosting or configure subdomain routing
 
 ### 5. Domain Routing Options
 
 **Option A: Shopify Hosting (Recommended for E-commerce)**
+
 - Use Shopify's checkout and hosting
 - Domain points directly to Shopify
 - Frontend can be hosted separately and embedded
 
 **Option B: Lovable Hosting with Shopify API**
+
 - Host frontend on Lovable
 - Use Shopify Storefront API for products
 - Use Shopify checkout URLs
 - Configure CNAME for subdomain (e.g., `store.yourdomain.com`)
 
 **Option C: Hybrid Approach**
+
 - Main site on Lovable (www.yourdomain.com)
 - Store subdomain on Shopify (shop.yourdomain.com)
 - Or reverse: store on Shopify, blog/docs on Lovable
@@ -118,16 +122,19 @@
 ## Troubleshooting
 
 ### Products Not Showing
+
 - Verify Storefront API token is correct
 - Check that products are published in Shopify
 - Verify API scopes are enabled
 
 ### Domain Not Connecting
+
 - Wait 24-48 hours for DNS propagation
 - Verify DNS records are correct
 - Check domain status in Shopify Admin
 
 ### Checkout Issues
+
 - Ensure checkout scopes are enabled in API settings
 - Verify Storefront API token has write permissions
 - Test with a simple product first

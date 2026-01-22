@@ -1,4 +1,8 @@
-import { shopifyRequest, GET_PRODUCTS_QUERY, GET_PRODUCT_BY_HANDLE_QUERY } from './shopify';
+import {
+  GET_PRODUCT_BY_HANDLE_QUERY,
+  GET_PRODUCTS_QUERY,
+  shopifyRequest,
+} from "./shopify";
 
 export async function getProducts(first: number = 20) {
   try {
@@ -18,7 +22,7 @@ export async function getProducts(first: number = 20) {
       })),
     })) || [];
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     return [];
   }
 }
@@ -50,7 +54,7 @@ export async function getProductByHandle(handle: string) {
       })),
     };
   } catch (error) {
-    console.error('Error fetching product:', error);
+    console.error("Error fetching product:", error);
     return null;
   }
 }

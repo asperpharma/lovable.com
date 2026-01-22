@@ -1,13 +1,13 @@
-import Link from 'next/link'
-import { getProductByHandle } from '@/lib/shopify-client'
-import AddToCartButton from '@/components/AddToCartButton'
+import Link from "next/link";
+import { getProductByHandle } from "@/lib/shopify-client";
+import AddToCartButton from "@/components/AddToCartButton";
 
 export default async function ProductPage({
   params,
 }: {
-  params: { handle: string }
+  params: { handle: string };
 }) {
-  const product = await getProductByHandle(params.handle)
+  const product = await getProductByHandle(params.handle);
 
   if (!product) {
     return (
@@ -19,13 +19,16 @@ export default async function ProductPage({
           </Link>
         </div>
       </main>
-    )
+    );
   }
 
   return (
     <main className="min-h-screen p-8">
       <div className="max-w-7xl mx-auto">
-        <Link href="/products" className="text-blue-600 hover:underline mb-4 inline-block">
+        <Link
+          href="/products"
+          className="text-blue-600 hover:underline mb-4 inline-block"
+        >
           ← Back to Products
         </Link>
 
@@ -43,7 +46,7 @@ export default async function ProductPage({
           <div>
             <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
             <p className="text-3xl font-bold mb-6">
-              {product.priceRange?.minVariantPrice?.amount}{' '}
+              {product.priceRange?.minVariantPrice?.amount}{" "}
               {product.priceRange?.minVariantPrice?.currencyCode}
             </p>
 
@@ -56,7 +59,9 @@ export default async function ProductPage({
 
             {product.variants && product.variants.length > 0 && (
               <div className="mb-6">
-                <label className="block mb-2 font-semibold">Select Variant:</label>
+                <label className="block mb-2 font-semibold">
+                  Select Variant:
+                </label>
                 <select
                   id="variant-select"
                   className="w-full p-2 border rounded"
@@ -64,7 +69,8 @@ export default async function ProductPage({
                 >
                   {product.variants.map((variant: any) => (
                     <option key={variant.id} value={variant.id}>
-                      {variant.title} - {variant.price.amount} {variant.price.currencyCode}
+                      {variant.title} - {variant.price.amount}{" "}
+                      {variant.price.currencyCode}
                     </option>
                   ))}
                 </select>
@@ -79,5 +85,5 @@ export default async function ProductPage({
         </div>
       </div>
     </main>
-  )
+  );
 }

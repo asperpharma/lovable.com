@@ -1,8 +1,8 @@
-import Link from 'next/link'
-import { getProducts } from '@/lib/shopify-client'
+import Link from "next/link";
+import { getProducts } from "@/lib/shopify-client";
 
 export default async function Home() {
-  const products = await getProducts()
+  const products = await getProducts();
 
   return (
     <main className="min-h-screen p-8">
@@ -42,7 +42,7 @@ export default async function Home() {
                   {product.description}
                 </p>
                 <p className="text-lg font-bold">
-                  {product.priceRange?.minVariantPrice?.amount}{' '}
+                  {product.priceRange?.minVariantPrice?.amount}{" "}
                   {product.priceRange?.minVariantPrice?.currencyCode}
                 </p>
               </Link>
@@ -51,5 +51,5 @@ export default async function Home() {
         </section>
       </div>
     </main>
-  )
+  );
 }

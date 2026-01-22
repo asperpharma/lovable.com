@@ -1,6 +1,7 @@
 # Asper Beauty Shop
 
-A modern e-commerce storefront for Asper Beauty Shop, built with Lovable, Next.js, and Shopify, configured for www.asperbeautyshop.com.
+A modern e-commerce storefront for Asper Beauty Shop, built with Lovable,
+Next.js, and Shopify, configured for www.asperbeautyshop.com.
 
 ## Features
 
@@ -27,8 +28,11 @@ cp .env.example .env
 ```
 
 Required variables:
-- `NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN`: Your Shopify store domain (e.g., `your-store.myshopify.com`)
-- `NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN`: Your Shopify Storefront API access token
+
+- `NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN`: Your Shopify store domain (e.g.,
+  `your-store.myshopify.com`)
+- `NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN`: Your Shopify Storefront API
+  access token
 
 ### 3. Get Shopify Storefront API Token
 
@@ -41,12 +45,14 @@ Required variables:
 ### 4. Configure Domain (www.asperbeautyshop.com)
 
 #### Option A: Automatic Connection (Recommended)
+
 1. In your Shopify Admin, go to Settings > Domains
 2. Click "Connect existing domain"
 3. Enter `asperbeautyshop.com`
 4. Follow the prompts to connect automatically
 
 #### Option B: Manual DNS Configuration
+
 1. Log in to your GoDaddy account
 2. Go to DNS Management for `asperbeautyshop.com`
 3. Update the following records:
@@ -91,6 +97,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see your store.
 ## Shopify Integration
 
 This project uses the Shopify Storefront API to:
+
 - Fetch products
 - Display product details
 - Create checkouts
@@ -101,6 +108,7 @@ This project uses the Shopify Storefront API to:
 ### Domain: www.asperbeautyshop.com
 
 Your domain `asperbeautyshop.com` is configured for:
+
 - **Primary URL**: www.asperbeautyshop.com
 - **Root domain**: asperbeautyshop.com (redirects to www)
 - **SSL**: Automatically provisioned by Shopify/Vercel
@@ -109,6 +117,7 @@ Your domain `asperbeautyshop.com` is configured for:
 ### GoDaddy to Shopify Connection
 
 Your GoDaddy domain is connected to Shopify, which handles:
+
 - SSL certificates
 - Domain verification
 - DNS management (if using automatic connection)
@@ -116,6 +125,7 @@ Your GoDaddy domain is connected to Shopify, which handles:
 ### Custom Domain in Lovable
 
 After connecting your domain to Shopify, configure it in Lovable:
+
 1. Go to your Lovable project settings
 2. Add custom domains: `asperbeautyshop.com` and `www.asperbeautyshop.com`
 3. Update DNS records if needed (Lovable will provide instructions)
@@ -136,6 +146,7 @@ After connecting your domain to Shopify, configure it in Lovable:
 ## Support
 
 For issues or questions:
+
 - Lovable Documentation: https://docs.lovable.dev
 - Shopify Help Center: https://help.shopify.com
 - GoDaddy Support: https://www.godaddy.com/help

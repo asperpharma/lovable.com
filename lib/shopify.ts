@@ -1,19 +1,24 @@
 // Shopify Storefront API configuration
-const SHOPIFY_STORE_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || '';
-const SHOPIFY_ACCESS_TOKEN = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || '';
-const SHOPIFY_API_VERSION = '2024-01';
+const SHOPIFY_STORE_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "";
+const SHOPIFY_ACCESS_TOKEN =
+  process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
+const SHOPIFY_API_VERSION = "2024-01";
 
 // Shopify Storefront API endpoint
-const SHOPIFY_API_URL = `https://${SHOPIFY_STORE_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
+const SHOPIFY_API_URL =
+  `https://${SHOPIFY_STORE_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 
 // Helper function to make GraphQL requests to Shopify
-export async function shopifyRequest(query: string, variables: Record<string, any> = {}) {
+export async function shopifyRequest(
+  query: string,
+  variables: Record<string, any> = {},
+) {
   try {
     const response = await fetch(SHOPIFY_API_URL, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': SHOPIFY_ACCESS_TOKEN,
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": SHOPIFY_ACCESS_TOKEN,
       },
       body: JSON.stringify({
         query,
@@ -26,14 +31,14 @@ export async function shopifyRequest(query: string, variables: Record<string, an
     }
 
     const data = await response.json();
-    
+
     if (data.errors) {
       throw new Error(JSON.stringify(data.errors));
     }
 
     return data;
   } catch (error) {
-    console.error('Shopify request error:', error);
+    console.error("Shopify request error:", error);
     throw error;
   }
 }
