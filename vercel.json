@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "domains": [
+    "www.asperbeautyshop.com",
+    "asperbeautyshop.com"
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://www.asperbeautyshop.com",
+      "permanent": true
+    }
+  ]
+}
