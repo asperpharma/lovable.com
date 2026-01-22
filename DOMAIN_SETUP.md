@@ -1,179 +1,147 @@
-# Complete Domain Setup Guide for www.asperbeautyshop.com
+# Domain Setup Guide for www.asperbeautyshop.com
 
-## Overview
-This guide will help you connect your Lovable project to the custom domain www.asperbeautyshop.com.
+This guide provides step-by-step instructions to connect your Lovable project to www.asperbeautyshop.com.
 
-## Prerequisites
-- ✅ Paid Lovable plan (required for custom domains)
-- ✅ Project published in Lovable
-- ✅ Access to domain registrar DNS settings
-- ✅ Domain: asperbeautyshop.com registered
+## Domain Configuration Overview
 
-## Step-by-Step Setup
+Your domain **asperbeautyshop.com** needs to be configured in three places:
+1. **GoDaddy** - DNS management
+2. **Shopify** - Domain connection for checkout
+3. **Lovable/Vercel** - Frontend hosting
 
-### Part 1: Lovable Platform Configuration
+## Step 1: GoDaddy DNS Configuration
 
-1. **Access Domain Settings**
-   - Log into your Lovable account
-   - Open your project
-   - Go to **Project → Settings → Domains**
-   - Or use the **Publish modal**
+### Option A: Automatic Connection (Recommended)
 
-2. **Add Custom Domain**
-   - Click **"Connect domain"** button
-   - Enter: `www.asperbeautyshop.com`
-   - Click **Continue**
+1. Log in to your **Shopify Admin**
+2. Go to **Settings → Domains**
+3. Click **"Connect existing domain"**
+4. Enter: `asperbeautyshop.com`
+5. Select **"Connect automatically"**
+6. You'll be redirected to GoDaddy
+7. Log in to GoDaddy and authorize the connection
+8. Wait 5-15 minutes for verification
 
-3. **Choose Setup Method**
+### Option B: Manual DNS Configuration
 
-   **Option A: Automatic Setup (Recommended)**
-   - Select your domain provider from the list
-   - Authorize Lovable to make DNS changes
-   - Lovable will automatically configure DNS records
-   - Click **Done**
+If automatic connection doesn't work, configure manually:
 
-   **Option B: Manual Setup**
-   - Copy the DNS records provided by Lovable
-   - Follow Part 2 below to add them manually
+1. Log in to your **GoDaddy account**
+2. Go to **My Products → Domains → asperbeautyshop.com → DNS**
+3. Add/Edit the following DNS records:
 
-### Part 2: Manual DNS Configuration
+   **A Record (Root Domain):**
+   - Type: `A`
+   - Name: `@`
+   - Value: `23.227.38.65`
+   - TTL: `600` (or default)
 
-If you chose manual setup, add these records to your domain registrar:
+   **CNAME Record (WWW):**
+   - Type: `CNAME`
+   - Name: `www`
+   - Value: `shops.myshopify.com`
+   - TTL: `600` (or default)
 
-#### DNS Records Needed:
+4. **Remove any conflicting records** (old A records pointing elsewhere)
+5. Wait up to 48 hours for DNS propagation
 
-**For www.asperbeautyshop.com:**
+## Step 2: Shopify Domain Connection
+
+1. In **Shopify Admin → Settings → Domains**
+2. Verify that `asperbeautyshop.com` is listed and verified
+3. Set as **primary domain** if desired
+4. Ensure SSL certificate is active (Shopify handles this automatically)
+
+## Step 3: Lovable/Vercel Deployment Configuration
+
+### In Lovable Dashboard:
+
+1. Go to your **Lovable project settings**
+2. Navigate to **Deployment** or **Domains** section
+3. Add custom domains:
+   - `asperbeautyshop.com`
+   - `www.asperbeautyshop.com`
+4. Follow Lovable's DNS instructions if additional records are needed
+
+### Vercel Configuration (if using Vercel directly):
+
+1. Go to your **Vercel project dashboard**
+2. Navigate to **Settings → Domains**
+3. Add domains:
+   - `asperbeautyshop.com`
+   - `www.asperbeautyshop.com`
+4. Vercel will provide DNS records to add (if not using Shopify DNS)
+
+## Step 4: DNS Record Priority
+
+**Important:** If your domain is connected to Shopify, you have two options:
+
+### Option 1: Shopify Hosting (Full E-commerce)
+- Domain points directly to Shopify
+- Shopify handles all hosting and checkout
+- Frontend can be embedded via Shopify themes
+
+### Option 2: Lovable/Vercel Hosting (Headless)
+- Domain points to Lovable/Vercel for frontend
+- Shopify Storefront API handles products/checkout
+- Requires CNAME record pointing to Vercel/Lovable
+
+**For www.asperbeautyshop.com, we recommend:**
+- **Root domain (asperbeautyshop.com)** → Shopify (for checkout)
+- **WWW (www.asperbeautyshop.com)** → Lovable/Vercel (for frontend)
+
+OR
+
+- Both point to Lovable/Vercel, with Shopify API integration
+
+## Step 5: Environment Variables
+
+Ensure these are set in your Lovable/Vercel deployment:
+
+```env
+NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-token-here
 ```
-Type: A
-Name: www
-Value: [IP address from Lovable]
-TTL: 3600
 
-Type: TXT
-Name: www
-Value: [Verification string from Lovable]
-TTL: 3600
-```
+## Step 6: Verification Checklist
 
-**For root domain (asperbeautyshop.com):**
-```
-Type: A
-Name: @ (or leave blank for root)
-Value: [Same IP as www record]
-TTL: 3600
-```
+After configuration, verify:
 
-#### Common Domain Registrar Instructions:
-
-**GoDaddy:**
-1. Log in → My Products → DNS
-2. Click "Add" to create new records
-3. Enter the A and TXT records above
-
-**Namecheap:**
-1. Domain List → Manage → Advanced DNS
-2. Add new record for each A and TXT record
-
-**Cloudflare:**
-1. Select domain → DNS → Records
-2. Add A and TXT records
-3. Ensure proxy is OFF (gray cloud) for A records
-
-**Google Domains:**
-1. My domains → DNS → Custom records
-2. Add A and TXT records
-
-### Part 3: Verification & SSL
-
-1. **Wait for DNS Propagation**
-   - Usually takes 1-24 hours
-   - Can take up to 72 hours maximum
-   - Check status in Lovable dashboard
-
-2. **SSL Certificate**
-   - Automatically issued by Lovable after DNS verification
-   - Usually takes 24-48 hours after DNS is verified
-   - Your site will be accessible via HTTPS
-
-3. **Verify Connection**
-   - Check Lovable dashboard for "Connected" status
-   - Visit https://www.asperbeautyshop.com
-   - Ensure SSL certificate is active (green lock icon)
-
-### Part 4: Project Configuration
-
-Update your project files to use the custom domain:
-
-1. **Environment Variables** (`.env` or `.env.local`):
-   ```
-   NEXT_PUBLIC_SITE_URL=https://www.asperbeautyshop.com
-   NEXT_PUBLIC_DOMAIN=www.asperbeautyshop.com
-   ```
-
-2. **Update any hardcoded URLs** in your code to use environment variables
-
-3. **Rebuild/Republish** your project after making changes
+- [ ] `www.asperbeautyshop.com` loads your Lovable site
+- [ ] `asperbeautyshop.com` redirects to `www.asperbeautyshop.com` (or loads correctly)
+- [ ] SSL certificate is active (HTTPS works)
+- [ ] Products load from Shopify API
+- [ ] Checkout redirects to Shopify correctly
+- [ ] Mobile responsive design works
 
 ## Troubleshooting
 
-### Domain Not Resolving
-- **Check DNS propagation**: Use `nslookup www.asperbeautyshop.com` or online tools
-- **Verify records**: Ensure A records point to correct IP
-- **Wait longer**: DNS can take up to 72 hours
+### Domain Not Loading
+- Wait 24-48 hours for DNS propagation
+- Verify DNS records in GoDaddy match instructions
+- Check domain status in Shopify Admin
+- Verify domain in Lovable/Vercel dashboard
 
 ### SSL Certificate Issues
-- **Wait 24-48 hours** after DNS verification
-- **Check certificate status** in Lovable dashboard
-- **Clear browser cache** and try again
+- Shopify automatically provisions SSL for connected domains
+- Vercel/Lovable automatically provisions SSL
+- Wait up to 24 hours for SSL activation
 
-### 404 Errors
-- **Ensure project is published** in Lovable
-- **Check build status** - project must be successfully built
-- **Verify domain is connected** in Lovable settings
+### Mixed Content Warnings
+- Ensure all API calls use HTTPS
+- Check that Shopify Storefront API uses HTTPS URLs
 
-### CNAME Conflicts
-- **Remove existing CNAME records** for www subdomain
-- **Use A records only** as recommended by Lovable
-- **Remove AAAA records** if they exist
+## Current Configuration
 
-### Redirect Issues
-- **Check redirect rules** in your project
-- **Verify both www and non-www** are configured
-- **Test with and without www** prefix
-
-## Testing Your Setup
-
-1. **DNS Check:**
-   ```bash
-   nslookup www.asperbeautyshop.com
-   ```
-
-2. **SSL Check:**
-   - Visit https://www.ssllabs.com/ssltest/
-   - Enter your domain
-
-3. **Accessibility:**
-   - Visit https://www.asperbeautyshop.com
-   - Check browser console for errors
-   - Test all pages and functionality
-
-## Next Steps
-
-After domain is connected:
-- ✅ Update all internal links to use the custom domain
-- ✅ Update social media profiles with new URL
-- ✅ Submit sitemap to search engines
-- ✅ Set up Google Analytics with new domain
-- ✅ Update any external services with new domain
+Based on your project files:
+- **Domain**: www.asperbeautyshop.com
+- **Platform**: Next.js on Vercel/Lovable
+- **E-commerce**: Shopify Storefront API
+- **DNS Provider**: GoDaddy
 
 ## Support Resources
 
-- [Lovable Custom Domain Docs](https://docs.lovable.dev/features/custom-domain)
-- Lovable Support: Available in your dashboard
-- Domain Registrar Support: Contact your registrar for DNS help
-
----
-
-**Status**: Ready for domain connection
-**Domain**: www.asperbeautyshop.com
-**Last Updated**: [Current Date]
+- **GoDaddy DNS Help**: https://www.godaddy.com/help/manage-dns-records-680
+- **Shopify Domain Setup**: https://help.shopify.com/en/manual/domains
+- **Vercel Domain Docs**: https://vercel.com/docs/concepts/projects/domains
+- **Lovable Support**: https://docs.lovable.dev
