@@ -1,0 +1,29 @@
+{
+  "projectName": "Asper Beauty Shop",
+  "framework": "nextjs",
+  "domain": "www.asperbeautyshop.com",
+  "deployment": {
+    "platform": "vercel",
+    "buildCommand": "npm run build",
+    "outputDirectory": ".next",
+    "environmentVariables": [
+      "NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN",
+      "NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN"
+    ],
+    "domains": [
+      "asperbeautyshop.com",
+      "www.asperbeautyshop.com"
+    ]
+  },
+  "integrations": {
+    "shopify": {
+      "enabled": true,
+      "storefrontApi": true
+    },
+    "godaddy": {
+      "domainManagement": "shopify",
+      "dnsProvider": "godaddy",
+      "domain": "asperbeautyshop.com"
+    }
+  }
+}

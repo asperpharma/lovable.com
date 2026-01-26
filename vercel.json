@@ -1,0 +1,28 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "domains": [
+    "asperbeautyshop.com",
+    "www.asperbeautyshop.com"
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "asperbeautyshop.com"
+        }
+      ],
+      "destination": "https://www.asperbeautyshop.com/$1",
+      "permanent": true
+    }
+  ]
+}
